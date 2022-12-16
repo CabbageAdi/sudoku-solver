@@ -17,11 +17,13 @@ fn main() {
                 let c = check_col(&grid, i, j);
                 let b = check_box(&grid, i, j);
 
-                let common: Vec<&i32> = r.iter().filter(|n| c.contains(n) && b.contains(n)).collect();
+                let common: Vec<&i32> = r
+                    .iter()
+                    .filter(|n| c.contains(n) && b.contains(n))
+                    .collect();
                 if common.len() == 1 {
                     grid[i][j] = **common.first().unwrap();
-                }
-                else if common.len() == 0 {
+                } else if common.len() == 0 {
                     panic!("No possibilities found at {} {} oops", i, j);
                 }
             }
@@ -33,12 +35,16 @@ fn main() {
 
 fn check_row(grid: &Vec<Vec<i32>>, x: usize, y: usize) -> Vec<i32> {
     let row = &grid[x];
-    (1..GRID_SIZE as i32 + 1).filter(|n| !row.contains(n)).collect()
+    (1..GRID_SIZE as i32 + 1)
+        .filter(|n| !row.contains(n))
+        .collect()
 }
 
 fn check_col(grid: &Vec<Vec<i32>>, x: usize, y: usize) -> Vec<i32> {
     let col: Vec<i32> = grid.iter().map(|r| r[y]).collect();
-    (1..GRID_SIZE as i32 + 1).filter(|n| !col.contains(n)).collect()
+    (1..GRID_SIZE as i32 + 1)
+        .filter(|n| !col.contains(n))
+        .collect()
 }
 
 fn check_box(grid: &Vec<Vec<i32>>, x: usize, y: usize) -> Vec<i32> {
@@ -53,7 +59,9 @@ fn check_box(grid: &Vec<Vec<i32>>, x: usize, y: usize) -> Vec<i32> {
             }
         }
     }
-    (1..GRID_SIZE as i32 + 1).filter(|n| !nums.contains(n)).collect()
+    (1..GRID_SIZE as i32 + 1)
+        .filter(|n| !nums.contains(n))
+        .collect()
 }
 
 fn input_grid(grid: &mut Vec<Vec<i32>>) {
@@ -68,7 +76,9 @@ fn input_grid(grid: &mut Vec<Vec<i32>>) {
         if c == ' ' {
             c = '0';
         }
-        grid.last_mut().unwrap().push(c.to_string().parse::<i32>().unwrap());
+        grid.last_mut()
+            .unwrap()
+            .push(c.to_string().parse::<i32>().unwrap());
     }
     // for i in 0..GRID_SIZE {
     //     let mut row: Vec<i32> = vec![];
